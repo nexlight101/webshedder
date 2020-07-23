@@ -12,12 +12,9 @@ import (
 )
 
 const (
-	// Filename1 const for schedules.json - schedules for loadshedding.
-	Filename1 string = "data/schedules.json"
-	// Filename2 const for schedules.json - areas for loadshedding.
-	Filename2 string = "data/areas.json" // A
-	// Layout - standard go date format.
-	Layout string = "Monday, 2 January 2006" // S
+	filename1 string = "data/schedules.json"    // Schedules for loadshedding
+	filename2 string = "data/areas.json"        // Areas for loadshedding
+	layout    string = "Monday, 2 January 2006" // Standard go date format
 )
 
 // Declare the start date of the schedule
