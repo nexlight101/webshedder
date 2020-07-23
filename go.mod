@@ -1,3 +1,3 @@
-module github.com/nexlight101/webShedder
+module github.com/nexlight101/webshedder
 
 go 1.14

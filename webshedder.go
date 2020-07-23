@@ -1,9 +1,9 @@
 // Package webshedder provides the tools to enable loadshedding forcasts for Port Elizabeth Metro
 package webshedder
+
 import (
-	"bufio"
 	"encoding/json"
-	"fmt"
+
 	"io/ioutil"
 	"log"
 	"os"
@@ -12,8 +12,8 @@ import (
 )
 
 const (
-	filename1 string = "data/schedules.json" // Schedules for loadshedding
-	filename2 string = "data/areas.json" // Areas for loadshedding
+	filename1 string = "data/schedules.json"    // Schedules for loadshedding
+	filename2 string = "data/areas.json"        // Areas for loadshedding
 	layout    string = "Monday, 2 January 2006" // Standard go date format
 )
 
@@ -43,7 +43,7 @@ type Area struct {
 var AreaM map[string][]string
 
 // BuildMap builds a map for area lookup
-func BuildMap(aX []area) map[string][]string {
+func BuildMap(aX []Area) map[string][]string {
 	// Create map variable
 	AreaMap := map[string][]string{}
 	for _, v := range aX {
@@ -62,7 +62,7 @@ func BuildMap(aX []area) map[string][]string {
 }
 
 // ReadJSON reads the json files for schedules and areas.
-func ReadJSON(filename1, filename2 string) ([]schedule, []area) {
+func ReadJSON(filename1, filename2 string) ([]Schedule, []Area) {
 	// Open the schedule JSON file
 	f1, err := os.OpenFile(filename1, os.O_RDONLY, 0644)
 	if err != nil {
@@ -76,7 +76,7 @@ func ReadJSON(filename1, filename2 string) ([]schedule, []area) {
 	}
 	defer f2.Close()
 	// Deal with schedules
-	scheduleJ := []schedule{}
+	scheduleJ := []Schedule{}
 	bX := []byte{}
 	bX, err = ioutil.ReadAll(f1)
 	if err != nil {
@@ -87,7 +87,7 @@ func ReadJSON(filename1, filename2 string) ([]schedule, []area) {
 		log.Fatalf("Cannot unmarshal from schedule json file!: %v\n", err)
 	}
 	// Deal with areas
-	areaJ := []area{}
+	areaJ := []Area{}
 	aBX := []byte{}
 	aBX, err = ioutil.ReadAll(f2)
 	if err != nil {
@@ -127,7 +127,7 @@ func cleanTSlice(sX []string) []string {
 }
 
 // SearchTimes finds the times in the schedule
-func SearchTimes(d *time.Time, st *string, g []string, s []schedule) []string {
+func SearchTimes(d *time.Time, st *string, g []string, s []Schedule) []string {
 	sX := make([]string, 0)
 	for _, v := range s {
 		if v.Date == *d && v.Stage == *st {
