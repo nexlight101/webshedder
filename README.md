@@ -1,4 +1,4 @@
-# webshedder
+# webshedder v2
 <ul>
     <li>The webshedder package provides functionality for proccesing stored json data optained from a loadshedding pdf provided by the Nelson Mandela Metro.</li>
     <li>Structs available: <ul>
