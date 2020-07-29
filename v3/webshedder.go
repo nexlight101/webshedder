@@ -123,9 +123,9 @@ func cleanTSlice(sX []string) []string {
 	// remove all new lines and add to slice
 	for _, time := range sX {
 		tmp := strings.Split(time, "\n")
-		// Take out leading space
+		// Take out leading & trailing spaces
 		for _, v := range tmp {
-			t = append(t, strings.TrimPrefix(v, " "))
+			t = append(t, strings.Trim(v, " "))
 		}
 		tX = append(tX, t...)
 	}
@@ -147,6 +147,7 @@ func SearchTimes(d *time.Time, st *string, g []string, s []Schedule) []Group {
 						sX = cleanTSlice(sX)
 						group.Group = g[0]
 						group.Times = append(group.Times, sX...)
+						sX = sX[:0] //clear sX to re-use
 						groupX = append(groupX, group)
 						return groupX
 					}
@@ -156,12 +157,14 @@ func SearchTimes(d *time.Time, st *string, g []string, s []Schedule) []Group {
 						sX = cleanTSlice(sX)
 						group.Group = g[0]
 						group.Times = append(group.Times, sX...)
+						sX = sX[:0] //clear sX to re-use
 						groupX = append(groupX, group)
 					} else if gr.Group == g[1] {
 						sX = append(sX, gr.Times...)
 						sX = cleanTSlice(sX)
 						group.Group = g[1]
 						group.Times = append(group.Times, sX...)
+						sX = sX[:0] //clear sX to re-use
 						groupX = append(groupX, group)
 						return groupX //This implies that g has group entries from small to large
 					}
