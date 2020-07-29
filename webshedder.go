@@ -119,10 +119,15 @@ func unique(intSlice []string) []string {
 // cleanTSlice cleans up the time slice for areas belonging to mulitiple groups
 func cleanTSlice(sX []string) []string {
 	tX := make([]string, 0)
+	t := make([]string, 0)
 	// remove all new lines and add to slice
 	for _, time := range sX {
 		tmp := strings.Split(time, "\n")
-		tX = append(tX, tmp...)
+		// Take out leading space
+		for _, v := range tmp {
+			t = append(t, strings.TrimPrefix(v, " "))
+		}
+		tX = append(tX, t...)
 	}
 	// removes duplicates
 	tX = unique(tX)
