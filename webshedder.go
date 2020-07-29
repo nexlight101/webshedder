@@ -150,6 +150,7 @@ func SearchTimes(d *time.Time, st *string, g []string, s []Schedule) []string {
 				case 2:
 					if gr.Group == g[0] {
 						sX = append(sX, gr.Times...)
+						sX = cleanTSlice(sX)
 					} else if gr.Group == g[1] {
 						sX = append(sX, gr.Times...)
 						sX = cleanTSlice(sX)
