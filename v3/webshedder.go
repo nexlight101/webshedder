@@ -138,10 +138,10 @@ func SearchTimes(d *time.Time, st *string, g []string, s []Schedule) []Group {
 	groupX := []Group{}
 	group := Group{}
 	for _, v := range s {
-		if v.Date == *d && v.Stage == *st {
-			for _, gr := range v.Group {
+		if v.Date == *d && v.Stage == *st { //Filter out date and stage
+			for _, gr := range v.Group { // Range through all groups passed in
 				switch len(g) {
-				case 1:
+				case 1: //if only one group
 					if gr.Group == g[0] {
 						sX = append(sX, gr.Times...)
 						sX = cleanTSlice(sX)
@@ -151,15 +151,17 @@ func SearchTimes(d *time.Time, st *string, g []string, s []Schedule) []Group {
 						groupX = append(groupX, group)
 						return groupX
 					}
-				case 2:
-					if gr.Group == g[0] {
+				case 2: // if more than one group
+					if gr.Group == g[0] { // For the first group
 						sX = append(sX, gr.Times...)
 						sX = cleanTSlice(sX)
+						// Make the group
 						group.Group = g[0]
 						group.Times = append(group.Times, sX...)
 						sX = sX[:0] //clear sX to re-use
 						groupX = append(groupX, group)
-					} else if gr.Group == g[1] {
+					} else if gr.Group == g[1] { // for the second group
+						group = Group{} //clear times to be re-used
 						sX = append(sX, gr.Times...)
 						sX = cleanTSlice(sX)
 						group.Group = g[1]
