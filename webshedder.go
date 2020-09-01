@@ -21,7 +21,7 @@ const (
 )
 
 // Declare the start date of the schedule
-var day time.Time = time.Date(2020, 6, 24, 0, 0, 0, 0, time.UTC)
+var day time.Time = time.Date(2020, 8, 20, 0, 0, 0, 0, time.UTC)
 
 //Schedule struct
 type Schedule struct {
